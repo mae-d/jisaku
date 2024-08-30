@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<main>
+<main class='py-4'>
     <div>ゲームタイトル</div>
     <table>
         @foreach($comments as $comment)
@@ -9,7 +9,7 @@
         </tr>
         @endforeach
     </table>
-    <a href="{{ route('create.impression') }}">
+    <a href="{{ route('create.impression', ['id' => $id]) }}">
     <button type='button' class='btn btn-primary'>投稿する</button>
     </a>
 </main>
