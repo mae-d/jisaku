@@ -27,23 +27,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-mb navbar-light bg-success shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    GAME IMPRESSION ROOM
+                <a class="navbar-brand" href="{{ url('admin/home') }}">
+                    GAME IMPRESSION ROOM 管理者ログインページ
                 </a>
-                @guest
-                <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
-            /
-            <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
-            /
-            <a class="my-navbar-item" href="{{ route('admin.login') }}">管理者ログイン</a>
             </div>
-            @else
             <div class="my-navbar-control">
-            @if (Auth::guard('admin')->check())
-            {{ Auth::user()->email }}
-            @else 
-      <a class="my-navbar-item" href="{{ route('my.page') }}">{{ Auth::user()->name }}</a>
-      @endif
+    @if (Auth::guard('admin')->check())
+        <div class="my-navbar-item">{{ Auth::user()->email }}</div>
       /
       <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -55,7 +45,11 @@
            document.getElementById('logout-form').submit();
            });
         </script>
-        @endguest
+        @else
+            <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+            /
+            <a class="my-navbar-item" href="{{ route('admin.login') }}">管理者ログイン</a>
+        @endif
            </div>
         </nav> 
         @yield('content')

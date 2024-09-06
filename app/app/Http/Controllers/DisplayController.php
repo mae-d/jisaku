@@ -18,11 +18,15 @@ use App\User;
 
 class DisplayController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:user');
+    }
     public function index(Request $request) {
         $game = new Game;
         $keyword = $request->input('keyword');
         if(empty($keyword)) {
-        $games = $game->where('del_flg', '=', '0')->get()->toArray();
+        $games = $game->where('del_flg', '=', '0')->orderByDesc('name')->paginate(10);
         } else {
             $games = $game->where('name', 'Like', "%{$keyword}%")->orWhere('category', 'Like', "%{$keyword}%")->get()->toArray();
         }
@@ -45,7 +49,7 @@ class DisplayController extends Controller
     public function myPage(){
         $user = Auth::user()->all();
         $comment = new Comment;
-        $comments = $comment->where('user_id', '=', Auth::id())->get();
+        $comments = $comment->where('user_id', '=', Auth::id())->orderByDesc('created_at')->paginate(10);
 
         return view('mypage',[
             'users' => $user,

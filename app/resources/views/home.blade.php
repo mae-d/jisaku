@@ -12,21 +12,34 @@
         </form>
         
     <table>
-        <th>全機種</th>
+        <th><a href="{{ route('index') }}">全機種</a></th>
         <th>PS5</th>
         <th>Switch</th>
     </table>
 
-    <tbody>
-        @foreach($games as $game)
-        <tr>
-            <th scope='col'><a href="{{ route('game.detail', ['game' => $game['id']]) }}">{{ $game['name'] }}</a></th>
+    <table class='table'>
+    <thead>
+        <tr class="table-secondary">
+            <th scope='col'>機種</th>
+            <th scope='col'>ジャンル</th>
+            <th scope='col'>タイトル</th>
         </tr>
+        </thead>
+        <tbody>
+        @foreach($games as $game)
+            <tr class="table-info">
+                <th scope='col'>{{ $game['model'] }}</th>
+                <th scope='col'>{{ $game['category'] }}</th>
+                <th scope='col'><a href="{{ route('game.detail', ['game' => $game['id']]) }}">{{ $game['name'] }}</a></th>
+            </tr>
         @endforeach
-
+        </tbody>
+        </table>
+        <div class="text-center">
+            {{ $games->links() }}
+        </div>
     </div>
     </div>
-    </tbody>
 </main>
 
 

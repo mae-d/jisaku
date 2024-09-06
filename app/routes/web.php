@@ -6,6 +6,10 @@ use App\Http\Controllers\RegistrationController;
 
 use App\Http\Controllers\UserController;
 
+// use App/Http\Controllers\Admin\RegistrationController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,17 +25,20 @@ Auth::routes();
 
 Route::prefix('admin')
 ->group(function () {
-    Route::get('/login', 'admin\LoginController@loginForm')->name('admin.login');
-    Route::post('/login', 'admin\LoginController@login');
+    Route::get('/login', 'Admin\LoginController@loginForm')->name('admin.login');
+    Route::post('/login', 'Admin\LoginController@login');
 });
 
 Route::prefix('admin')
 ->middleware('auth:admin')
 ->group(function () {
-    Route::get('/', 'Admin\HomeController@index')->name('admin.home');
+    Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+    Route::get('/user/{id}/detail', 'Admin\HomeController@userDetail')->name('user.detail');
+    Route::get('/create_game', 'Admin\RegistrationController@creteGameForm')->name('creat.game');
 });
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'auth:user'], function(){
+
 Route::get('/', [DisplayController::class, 'index'])->name('index');
 Route::get('/game/{game}/detail', [DisplayController::class, 'gameDetail'])->name('game.detail');
 Route::get('/mypage', [DisplayController::class, 'myPage'])->name('my.page');
