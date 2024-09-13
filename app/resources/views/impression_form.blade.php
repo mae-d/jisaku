@@ -8,6 +8,17 @@
                 </div>
                 <div class="card-body">
                     <div class="card-body">
+                    <div class='panel-body'>
+                            @if($errors->any())
+                            <div class='alert alert-danger'>
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                         <form action="{{ route('create.impression', ['id' => $id]) }}" method="post">
                             @csrf
                             <label for='comment' class='mt-2'>感想</label>

@@ -3,7 +3,7 @@
 <main class="py-4">
     <div class="col-md-9 mx-auto">
     <div class="row justify-content-around">
-            <a href="">
+            <a href="{{ route('create.game') }}">
                 <button type='button' class='btn btn-primary'>ゲームタイトル追加</button>
             </a>
     </div>

@@ -1,8 +1,8 @@
 @extends('layout')
 @section('content')
 <main class="py-4">
-    <div class="col-md-5 mx-auto">
-    <div class="card">
+<div class="col-md-9 mx-auto">
+    <div class="card" style="width: 62rem;">
     <div class="card-header">
                     <h4 class='text-center'>ゲームタイトル一覧</h4>
                 </div>
@@ -40,6 +40,8 @@
         </div>
     </div>
     </div>
+    <a href="{{ route('images') }}">ゲームの面白いスクショなど</a>
+
 </main>
 
 

@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-mb navbar-light bg-success shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('admin/home') }}">
-                    GAME IMPRESSION ROOM 管理者ログインページ
+                    GAME IMPRESSION ROOM 管理者ページ
                 </a>
             </div>
             <div class="my-navbar-control">

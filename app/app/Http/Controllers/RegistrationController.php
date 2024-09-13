@@ -10,6 +10,8 @@ use illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Http\Requests\CreateData;
+
 use App\Game;
 
 use App\Comment;
@@ -23,7 +25,7 @@ class RegistrationController extends Controller
         ]);
     }
 
-    public function createImpression(Request $request) {
+    public function createImpression(CreateData $request) {
         $comment = new Comment;
         
         $comment->game_id = $request->game_id;
@@ -37,10 +39,8 @@ class RegistrationController extends Controller
     public function impressionDeleat($id) {
         $comment = new Comment;
 
-        $comments = $comment->where('id', '=', $id)->get();
+        $comment->where('id', '=', $id)->delete();
 
-        $comments->delete();
-
-        return redirect('mypage');
+        return redirect('/');
     }
 }

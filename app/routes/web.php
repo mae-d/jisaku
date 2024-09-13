@@ -6,7 +6,11 @@ use App\Http\Controllers\RegistrationController;
 
 use App\Http\Controllers\UserController;
 
-// use App/Http\Controllers\Admin\RegistrationController;
+use App\Http\Controllers\admin_RegistrationController;
+
+use App\Http\Controllers\ImageUploadController;
+
+use App\Http\Controllers\LikeController;
 
 
 
@@ -34,8 +38,11 @@ Route::prefix('admin')
 ->group(function () {
     Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
     Route::get('/user/{id}/detail', 'Admin\HomeController@userDetail')->name('user.detail');
-    Route::get('/create_game', 'Admin\RegistrationController@creteGameForm')->name('creat.game');
+    Route::get('/create_game', 'admin_RegistrationController@createGameForm')->name('create.game');
+    Route::post('/create_game', 'admin_RegistrationController@createGame');
+    Route::get('/user_delete/{id}', 'admin_RegistrationController@userDelete')->name('user.delete');
 });
+
 
 Route::group(['middleware' => 'auth:user'], function(){
 
@@ -46,6 +53,14 @@ Route::get('/create_impression/{id}', [RegistrationController::class, 'createImp
 Route::post('/create_impression/{id}', [RegistrationController::class, 'createImpression']);
 Route::get('/user_edit', [UserController::class, 'userEditForm'])->name('user.edit');
 Route::post('/user_edit', [UserController::class, 'userEdit']);
-Route::get('/user_softdeleat', [RegistrationController::class, 'userSoftdeleat'])->name('user.softdeleat');
+Route::get('/mydata_deletecomfirm', [UserController::class, 'mydataDeleteConfirm'])->name('mydata.deleteconfirm');
+Route::get('/mydata_delete', [UserController::class, 'mydataDelete'])->name('mydata.delete');
 Route::get('/impression_deleat/{id}', [RegistrationController::class, 'impressionDeleat'])->name('impression.deleat');
+Route::get('/create', [ImageUploadController::class, 'create'])->name('create');
+Route::post('/image_upload', [ImageUploadController::class, 'store'])->name('image_upload');
+Route::get('/images', [ImageUploadController::class, 'images'])->name('images');
+Route::post('/like/{commentId}',[LikeController::class,'store']);
+Route::post('/unlike/{commentId}',[LikeController::class,'destroy']);
+
+
 });

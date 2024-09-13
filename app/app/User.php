@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\Api\Auth\ResetPasswordNotification;
 
 
 class User extends Authenticatable
@@ -41,4 +42,34 @@ class User extends Authenticatable
     public function comment() {
         return $this->hasMany('App\Comment');
     }
-}
+
+    public function likes()
+    {
+        return $this->belongsToMany('App\Comment','likes','user_id','comment_id')->withTimestamps();
+    }
+
+        //この投稿に対して既にlikeしたかどうかを判別する
+        public function isLike($commentId)
+        {
+          return $this->likes()->where('comment_id',$commentId)->exists();
+        }
+    
+        //isLikeを使って、既にlikeしたか確認したあと、いいねする（重複させない）
+        public function like($commentId)
+        {
+          if($this->isLike($commentId)){
+            //もし既に「いいね」していたら何もしない
+          } else {
+            $this->likes()->attach($commentId);
+          }
+        }
+    
+        //isLikeを使って、既にlikeしたか確認して、もししていたら解除する
+        public function unlike($commentId)
+        {
+          if($this->isLike($commentId)){
+            //もし既に「いいね」していたら消す
+            $this->likes()->detach($commentId);
+          } else {
+          }
+}}

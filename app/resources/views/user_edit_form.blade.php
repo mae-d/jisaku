@@ -17,24 +17,17 @@
               @csrf
               <div class="form-group">
                 <label for="email">メールアドレス</label>
-                @foreach($users as $user)
-                <input type="text" class="form-control" id="email" name="email"  value="{{ $user['email'] }}" />
+                <input type="text" class="form-control" id="email" name="email"  value="{{ $users->email }}" />
               </div>
               <div class="form-group">
                 <label for="name">ユーザー名</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $user['name'] }}" />
+                <input type="text" class="form-control" id="name" name="name" value="{{ $users->name }}" />
               </div>
-                @endforeach
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary">編集する</button>
               </div>
             </form>
-            <form action="{{ route('user.softdeleat') }}" method="GET">
-            <div class="text-right">
-              <button type="submit" class="btn btn-warning">削除する</button>
-              </div>
-          </form>
          </div>
         </nav>
       </div>

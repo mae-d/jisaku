@@ -16,6 +16,10 @@ use App\Comment;
 
 use App\User;
 
+use App\Image;
+
+use App\Like;
+
 class DisplayController extends Controller
 {
     public function __construct()
@@ -28,7 +32,7 @@ class DisplayController extends Controller
         if(empty($keyword)) {
         $games = $game->where('del_flg', '=', '0')->orderByDesc('name')->paginate(10);
         } else {
-            $games = $game->where('name', 'Like', "%{$keyword}%")->orWhere('category', 'Like', "%{$keyword}%")->get()->toArray();
+            $games = $game->where('name', 'Like', "%{$keyword}%")->orWhere('category', 'Like', "%{$keyword}%")->orderByDesc('name')->paginate(10);
         }
         return view('home',compact('keyword'), [
             'games' => $games,
@@ -37,17 +41,22 @@ class DisplayController extends Controller
 
     public function gameDetail($game){
         $comment = new Comment;
+        $title = new Game;
 
-        $comments = $comment->where('game_id', '=', $game)->get();
+        // $posts = Comment::withCount('likes')->get();
+        $titles = $title->where('id', '=', $game)->first();
+        $comments = Comment::withCount('likes')->where('game_id', '=', $game)->orderByDesc('created_at')->paginate(10);
+        
         
         return view('impression', [
             'comments' => $comments,
             'id' => $game,
+            'titles' => $titles,
         ]);
     }
 
     public function myPage(){
-        $user = Auth::user()->all();
+        $user = Auth::user();
         $comment = new Comment;
         $comments = $comment->where('user_id', '=', Auth::id())->orderByDesc('created_at')->paginate(10);
 

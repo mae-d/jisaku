@@ -5,7 +5,7 @@
     <div class="card" style="width: 62rem;">
     <div class="card-header">
     <h4 class='text-center'>ユーザー情報一覧</h4>
-    <a href="">
+    <a href="{{ route('user.delete', ['id' => $users->id]) }}">
                 <button type='button' class='btn btn-danger' onclick='return confirm("本当に削除しますか？")'>ユーザー削除</button>
             </a>
     <div class="card-title">

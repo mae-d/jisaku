@@ -26,7 +26,7 @@ class HomeController extends Controller
         if(empty($keyword)) {
             $users = $user->orderByDesc('name')->paginate(10);
             } else {
-                $users = $user->where('name', 'Like', "%{$keyword}%")->get()->toArray();
+                $users = $user->where('name', 'Like', "%{$keyword}%")->orderByDesc('created_at')->paginate(10);
             }
 
         return view('admin.home',compact('keyword'),[

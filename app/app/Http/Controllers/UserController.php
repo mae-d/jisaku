@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     public function userEditForm() {
-        $user = Auth::user()->all();
+        $user = Auth::user();
         
         return view('user_edit_form',[
             'users' => $user,
@@ -25,10 +25,26 @@ class UserController extends Controller
 
         $user->email = $request->email;
         $user->name = $request->name;
-        Auth::user()->user()->save($user);
+        $user->save();
 
-        return redirect('/my.page');
+        return redirect('/');
     }
 
-    public function userSoftdeleat(){}
+    public function mydataDeleteConfirm() {
+        $user = Auth::user();
+
+        return view('mydata_deleteconfirm',[
+            'users' => $user,
+        ]);
+    }
+
+    public function mydataDelete() {
+        $user = Auth::user();
+
+        Auth::logout();
+        $user->delete();
+        
+        return redirect("/");
+    }
+
 }

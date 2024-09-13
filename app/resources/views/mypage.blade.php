@@ -7,13 +7,14 @@
                     <h4 class='text-center'>ユーザー情報一覧</h4>
                 </div>
                 <div class="card-body">
-                    @foreach($users as $user)
-                    <div class='mt-2'>{{ $user['name'] }}</div>
-                    @endforeach
+                    <div class='mt-2'>{{ $users->name }}</div>
                 </div>
                 <div class="row justify-content-center">
                     <a href="{{ route('user.edit') }}">
                         <button type='button' class='btn btn-primary'>ユーザー情報編集</button>
+                    </a>
+                    <a href="{{ route('mydata.deleteconfirm') }}">
+                        <button type='button' class='btn btn-danger'  onclick='return confirm("削除手続きを行いますか？")'>ユーザー削除</button>
                     </a>
                 </div>
                 <div class="card-header">

@@ -24,7 +24,7 @@ class CreateData extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'max:100',
+            'comment' => 'required|max:100',
         ];
     }
 }
