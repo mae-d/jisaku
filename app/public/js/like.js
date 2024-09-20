@@ -1,4 +1,5 @@
 function like(commentId) {
+
     $.ajax({
       headers: {
         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -8,9 +9,11 @@ function like(commentId) {
     })
       .done(function (data, status, xhr) {
         console.log(data)
+        $('.like').css('color','red');
+
       })
       .fail(function (xhr, status, error) {
-        console.log()
+        console.log('fail')
       })
   }
 
@@ -26,12 +29,6 @@ function like(commentId) {
         console.log(data)
       })
       .fail(function (xhr, status, error) {
-        console.log()
+        console.log('fail')
       })
   }
-
-  // function like(commentId) {
-  //   console.log("動いてる？")
-  // }
-  
-  

@@ -40,7 +40,7 @@
         </div>
     </div>
     </div>
-    <a href="{{ route('images') }}">ゲームの面白いスクショなど</a>
+    <!-- <a href="{{ route('images') }}">ゲームの面白いスクショなど</a> -->
 
 </main>
 

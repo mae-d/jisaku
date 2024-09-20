@@ -16,6 +16,8 @@ use App\Game;
 
 use App\Comment;
 
+use App\Image;
+
 class RegistrationController extends Controller
 {
     public function createImpressionForm($id) {
@@ -27,7 +29,16 @@ class RegistrationController extends Controller
 
     public function createImpression(CreateData $request) {
         $comment = new Comment;
-        
+
+        $image = $request->file('image');
+        if($image) {
+        $path = $image->store('public/images');
+ 
+        } else {
+            $path = null;
+        }
+
+        $comment->path = $path;
         $comment->game_id = $request->game_id;
         $comment->comment = $request->comment;
 
@@ -35,6 +46,8 @@ class RegistrationController extends Controller
 
         return redirect('/');
     }
+
+
 
     public function impressionDeleat($id) {
         $comment = new Comment;

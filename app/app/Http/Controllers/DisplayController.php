@@ -39,14 +39,14 @@ class DisplayController extends Controller
         ]);
     }
 
-    public function gameDetail($game){
+    public function gameDetail(Request $request ,$game){
         $comment = new Comment;
         $title = new Game;
-
-        // $posts = Comment::withCount('likes')->get();
+ 
         $titles = $title->where('id', '=', $game)->first();
-        $comments = Comment::withCount('likes')->where('game_id', '=', $game)->orderByDesc('created_at')->paginate(10);
+        $comments = $comment->where('game_id', '=', $game)->orderByDesc('created_at')->paginate(10);
         
+
         
         return view('impression', [
             'comments' => $comments,

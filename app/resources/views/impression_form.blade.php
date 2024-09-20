@@ -19,12 +19,16 @@
                             </div>
                             @endif
                         </div>
-                        <form action="{{ route('create.impression', ['id' => $id]) }}" method="post">
+                        <form action="{{ route('create.impression', ['id' => $id]) }}" method="post" class="bl_form" enctype="multipart/form-data">
                             @csrf
                             <label for='comment' class='mt-2'>感想</label>
                                 <textarea class='form-control' name='comment'>{{ old('comment') }}</textarea>
                             <input type='hidden' name='game_id' value="{{ $id }}">
                             <div class='row justify-content-center'>
+                            <div class="bl_formGroup">
+            <label for="image" class="el_label">画像アップロード</label>
+            <input type="file" class="el_form" name="image">
+        </div>
                                 <button type='submit' class='btn btn-primary w-25 mt-3'>投稿する</button>
                             </div> 
                         </form>

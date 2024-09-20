@@ -62,5 +62,4 @@ Route::get('/images', [ImageUploadController::class, 'images'])->name('images');
 Route::post('/like/{commentId}',[LikeController::class,'store']);
 Route::post('/unlike/{commentId}',[LikeController::class,'destroy']);
 
-
 });

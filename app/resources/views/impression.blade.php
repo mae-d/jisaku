@@ -4,6 +4,9 @@
 <div class="col-md-9 mx-auto">
     <div class="row justify-content-around">
 <h3>{{ $titles->name }}</h3>
+<a href="{{ route('create.impression', ['id' => $id]) }}">
+    <button type='button' class='btn btn-primary'>投稿する</button>
+    </a>
     </div>
     <div class="card" style="width: 62rem;">
     <div class="card-header">
@@ -15,25 +18,35 @@
         </thead>
         <tbody>
         @foreach($comments as $comment)
-        
             <tr class="table-info">
                 <th scope='col'>{{ $comment['comment'] }}</th>
-                <th scope='col'><button onclick="like({{$comment->id}})">いいね</button></th>
-                <th scope='col'><button onclick="unlike({{$comment->id}})">いいね解除</button></th>
-                <th scope='col'>{{ $comment->likes_count }}</th>
+                @if (!$comment->isLikedBy(Auth::user()))
+                <th scope='col'>
+                    <button class='like' onclick="like({{$comment->id}})">いいね</button>
+                </th>
+                @else
+                <th scope='col'>
+                    <button class="liked" onclick="like({{$comment->id}})">いいね</button>
+                </th>
+                @endif
+                <th scope='col'>
+                    <button onclick="unlike({{$comment->id}})">いいね解除</button>
+                </th>
+                <th scope='col'>
+            <img src="{{ Storage::url($comment['path']) }}" alt="投稿写真はありません" style="width: 200px;">
+        </th>
+
             </tr>
-        
         @endforeach
         </tbody>
         </table>
         <div class="text-center">
             {{ $comments->links() }}
         </div>
-        <a href="{{ route('create.impression', ['id' => $id]) }}">
-    <button type='button' class='btn btn-primary'>投稿する</button>
-    </a>
+        
                 </div>
                 </div>
 
 </main>
+
 @endsection
