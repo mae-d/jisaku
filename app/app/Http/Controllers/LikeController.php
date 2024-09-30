@@ -12,15 +12,12 @@ class LikeController extends Controller
 
             public function store($commentId)
             {
+                
                 Auth::user()->like($commentId);
-                return 'ok!'; //レスポンス内容
+                return response()->json($commentId); //レスポンス内容
             }
         
-            public function destroy($commentId)
-            {
-                Auth::user()->unlike($commentId);
-                return 'ok!'; //レスポンス内容
-            }
+
 
 }
 

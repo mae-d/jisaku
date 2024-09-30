@@ -11,6 +11,17 @@
   color: red;
 }
 
+.like {
+  color: black;
+}
+
+.active{
+  color: #f60909;
+}
+
+.noactive{
+  color:#000
+}
 
 :root {
   --blue: #3490dc;

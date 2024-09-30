@@ -22,16 +22,13 @@
                 <th scope='col'>{{ $comment['comment'] }}</th>
                 @if (!$comment->isLikedBy(Auth::user()))
                 <th scope='col'>
-                    <button class='like' onclick="like({{$comment->id}})">いいね</button>
+                    <button id='<?php echo $comment->id ?>' class='like likes-btn{{ $comment->id }}'  onclick="like({{$comment->id}})" data-id='{{ $comment->id }}' >いいね</button>
                 </th>
                 @else
                 <th scope='col'>
-                    <button class="liked" onclick="like({{$comment->id}})">いいね</button>
+                    <button  class="liked likes-btn{{ $comment->id }}" onclick="like({{$comment->id}})" data-id='{{ $comment->id }}'>いいねしました</button>
                 </th>
                 @endif
-                <th scope='col'>
-                    <button onclick="unlike({{$comment->id}})">いいね解除</button>
-                </th>
                 <th scope='col'>
             <img src="{{ Storage::url($comment['path']) }}" alt="投稿写真はありません" style="width: 200px;">
         </th>

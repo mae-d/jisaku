@@ -60,6 +60,6 @@ Route::get('/create', [ImageUploadController::class, 'create'])->name('create');
 Route::post('/image_upload', [ImageUploadController::class, 'store'])->name('image_upload');
 Route::get('/images', [ImageUploadController::class, 'images'])->name('images');
 Route::post('/like/{commentId}',[LikeController::class,'store']);
-Route::post('/unlike/{commentId}',[LikeController::class,'destroy']);
+
 
 });

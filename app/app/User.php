@@ -55,26 +55,22 @@ class User extends Authenticatable
   }
   public function isLike($commentId)
   {
+
     return $this->likes()->where('comment_id',$commentId)->exists();
   }
 
   //isLikeを使って、既にlikeしたか確認したあと、いいねする（重複させない）
   public function like($commentId)
   {
+
     if($this->isLike($commentId)){
-      //もし既に「いいね」していたら何もしない
+
+      $this->likes()->detach($commentId);
     } else {
+
       $this->likes()->attach($commentId);
     }
   }
 
-  //isLikeを使って、既にlikeしたか確認して、もししていたら解除する
-  public function unlike($commentId)
-  {
-    if($this->isLike($commentId)){
-      //もし既に「いいね」していたら消す
-      $this->likes()->detach($commentId);
-    } else {
-    }
-}
+
 }
